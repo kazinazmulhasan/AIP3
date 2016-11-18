@@ -1,8 +1,9 @@
 from random import shuffle
-from k_nearest_neighbor import k_nearest_neighbor
-# import naive_bayes
-# import tan
-# import id3
+from copy import deepcopy
+from k_nearest_neighbor import *
+# from naive_bayes import *
+# from tan import *
+from id3 import *
 
 class Load_dataset:
 	def __init__(self, file_path):
@@ -79,12 +80,20 @@ class Load_dataset:
 def Run_over_dataset(file_path):
 	# run each algorithm 5 times with same datasets
 	for i in range(5):
-		dataset = Load_dataset(file_path)
-		k_nearest_neighbor(dataset)
-		# naive_bayes(dataset)
-		# tan(dataset)
-		# id3(dataset)
-	print()
+		dataset1 = Load_dataset(file_path)
+		# switch train and test
+		dataset2 = deepcopy(dataset1)
+		dataset2.train_dataset = dataset1.test_dataset
+		dataset2.test_dataset = dataset1.train_dataset
+		k_nearest_neighbor(dataset1)
+		k_nearest_neighbor(dataset2)
+		# naive_bayes(dataset1)
+		# naive_bayes(dataset2)
+		# tan(dataset1)
+		# tan(dataset2)
+		id3(dataset1)
+		id3(dataset2)
+		print()
 
 if __name__ == "__main__":
 	# Run_over_dataset("datasets/breast-cancer-wisconsin.data.txt")

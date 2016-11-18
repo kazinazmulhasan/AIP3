@@ -109,4 +109,4 @@ class k_nearest_neighbor:
 				self.miss += 1
 		# accuracy equals to number of times we predicted currect devided by
 		# number of rows in test dataset
-		print("Accuracy: %f" % (self.hit/len(self.test)))
+		print("KNN Accuracy: %f" % (self.hit/len(self.test)))
